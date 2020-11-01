@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/ComplaintDesk/static/css/main.ec546ddb.chunk.css",
+    "main.js": "/ComplaintDesk/static/js/main.38bbcf54.chunk.js",
+    "main.js.map": "/ComplaintDesk/static/js/main.38bbcf54.chunk.js.map",
+    "runtime-main.js": "/ComplaintDesk/static/js/runtime-main.ca3491c3.js",
+    "runtime-main.js.map": "/ComplaintDesk/static/js/runtime-main.ca3491c3.js.map",
+    "static/css/2.2a1d4e3d.chunk.css": "/ComplaintDesk/static/css/2.2a1d4e3d.chunk.css",
+    "static/js/2.c708f150.chunk.js": "/ComplaintDesk/static/js/2.c708f150.chunk.js",
+    "static/js/2.c708f150.chunk.js.map": "/ComplaintDesk/static/js/2.c708f150.chunk.js.map",
+    "index.html": "/ComplaintDesk/index.html",
+    "precache-manifest.044f6dcec8a28c251f3c7ebaeb7996c1.js": "/ComplaintDesk/precache-manifest.044f6dcec8a28c251f3c7ebaeb7996c1.js",
+    "service-worker.js": "/ComplaintDesk/service-worker.js",
+    "static/css/2.2a1d4e3d.chunk.css.map": "/ComplaintDesk/static/css/2.2a1d4e3d.chunk.css.map",
+    "static/css/main.ec546ddb.chunk.css.map": "/ComplaintDesk/static/css/main.ec546ddb.chunk.css.map",
+    "static/js/2.c708f150.chunk.js.LICENSE.txt": "/ComplaintDesk/static/js/2.c708f150.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ca3491c3.js",
+    "static/css/2.2a1d4e3d.chunk.css",
+    "static/js/2.c708f150.chunk.js",
+    "static/css/main.ec546ddb.chunk.css",
+    "static/js/main.38bbcf54.chunk.js"
+  ]
+}
