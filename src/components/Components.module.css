@@ -72,3 +72,24 @@ html{
     background-image:linear-gradient(to bottom, #A875FF, #E469FF);
 }
 
+.form{
+    margin-left: auto;
+}
+
+.C_input{
+    border-bottom: 2px solid brown;
+    margin: 15px;
+}
+
+.C_input > input,textarea{
+    width: 100%;
+    border:none;
+    outline: none;
+    background: none;
+    padding-left: 8px;
+}
+
+.C_input > textarea{
+    width: 100%;
+}
+
