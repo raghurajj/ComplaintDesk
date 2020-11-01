@@ -93,3 +93,9 @@ html{
     width: 100%;
 }
 
+h1{
+    color:brown;
+    margin: auto;
+    margin-top: 10vh;
+}
+

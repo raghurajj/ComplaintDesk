@@ -23,6 +23,7 @@ class Complaint extends Component{
         this.getCoordinates=this.getCoordinates.bind(this);
         this.onChangeInput=this.onChangeInput.bind(this);
         this.onClickMap=this.onClickMap.bind(this);
+        this.handleSubmit=this.handleSubmit.bind(this);
     }
 
     getLocation(event) {
@@ -49,6 +50,10 @@ class Complaint extends Component{
         })
     }
 
+    handleSubmit(event){
+        event.preventDefault();
+    }
+
     onClickMap(map, evt) {
         this.setState({
             lattitude:evt.lngLat.lat,
@@ -58,37 +63,52 @@ class Complaint extends Component{
 
     render(){
         return(
-            <div className="row my-5 mx-5">
-                <div className="col">
-                    <form>
-                        <div className={Styles.C_input}>
-                            <input onChange={this.onChangeInput}  type="text" name="topic" placeholder="Topic"/><br/> 
-                        </div>  
-                        <div className={Styles.C_input}>
-                            <textarea onChange={this.onChangeInput} type="text" name="description" placeholder="Description"/><br/> 
-                        </div> 
-                        <div className={Styles.C_input}>
-                            <input onChange={this.onChangeInput} type="number" name="lattitude" placeholder="Lattitude" value={this.state.lattitude}/><br/> 
-                        </div> 
-                        <div className={Styles.C_input}>
-                            <input onChange={this.onChangeInput} type="number" name="longitude" placeholder="Longitude" value={this.state.longitude}/><br/> 
-                        </div> 
-
-                        <button onClick={this.getLocation }   className={`${Styles.btn} ${Styles.fill_button}`}>getlocation</button>
-                        
-                    </form>
+            <div>
+                <div className="row">
+                    <h1>Add a New Complaint</h1>
                 </div>
-                <div className="col">
-                    <Map
-                        style="mapbox://styles/mapbox/streets-v9"
-                        containerStyle={{
-                            height: '50vh',
-                            width: '50vw'
-                        }}
-                        center={[80.94615925,26.8467088]}
-                        zoom={[9]}
-                        onClick={this.onClickMap}
-                    />
+                <div className="row my-5 mx-5">
+                    <div className="col">
+                        <form>
+                            <div className={Styles.C_input}>
+                                <input onChange={this.onChangeInput}  type="text" name="topic" placeholder="Topic"/><br/> 
+                            </div>  
+                            <div className={Styles.C_input}>
+                                <textarea onChange={this.onChangeInput} type="text" name="description" placeholder="Description"/><br/> 
+                            </div> 
+                            <div className={Styles.C_input}>
+                                <input onChange={this.onChangeInput} type="number" name="lattitude" placeholder="Lattitude" value={this.state.lattitude}/><br/> 
+                            </div> 
+                            <div className={Styles.C_input}>
+                                <input onChange={this.onChangeInput} type="number" name="longitude" placeholder="Longitude" value={this.state.longitude}/><br/> 
+                            </div> 
+
+                            <div className={Styles.C_input}>
+                                <input type="file" name="image" placeholder="image" /><br/> 
+                            </div>
+                            <div className="row">
+                                <div className="col-md-5 mx-auto" >
+                                <button onClick={this.getLocation }   className={`${Styles.btn} ${Styles.fill_button}`}>getlocation</button>
+                                </div>
+                                <div className="col-md-5 mx-auto" >
+                                    <button onClick={this.handleSubmit} className={`${Styles.btn} ${Styles.fill_button}`}> Submit Complaint</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <div className="col">
+                        <Map
+                            style="mapbox://styles/mapbox/streets-v9"
+                            containerStyle={{
+                                height: '50vh',
+                                width: '50vw'
+                            }}
+                            center={[80.94615925,26.8467088]}
+                            zoom={[9]}
+                            onClick={this.onClickMap}
+                        />
+                    </div>
                 </div>
             </div>
             

@@ -3,7 +3,7 @@ import {NavLink,Link} from 'react-router-dom'
 import Styles from './Components.module.css';
 import { Navbar, NavbarBrand,Nav, NavbarToggler, Collapse , NavItem } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faPlusSquare, faArchive } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faPlusSquare, faArchive, faSignInAlt } from '@fortawesome/free-solid-svg-icons'
 
 export default class Header extends Component{
     constructor(props){
@@ -37,7 +37,12 @@ export default class Header extends Component{
                             </NavItem>
                             <NavItem>
                                 <NavLink className={`${Styles.navlink}`} to="/pastcomplaints">
-                                <FontAwesomeIcon icon={faArchive} />&nbsp;Past Complaints
+                                <FontAwesomeIcon icon={faArchive} />&nbsp;Past Complaints&nbsp;&nbsp;
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className={`${Styles.navlink}`} to="/login">
+                                <FontAwesomeIcon icon={faSignInAlt} />&nbsp;Login
                                 </NavLink>
                             </NavItem>
 
