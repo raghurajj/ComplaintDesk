@@ -3,7 +3,7 @@ import axios from 'axios';
 import Styles from './Components.module.css';
 
 
-class PastComplaint extends Component{
+class Home extends Component{
     constructor(props){
         super(props);
         this.state={
@@ -17,13 +17,12 @@ class PastComplaint extends Component{
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `JWT ${localStorage.getItem('access')}`,
                     'Accept': 'application/json'
                 }
             };
 
             try {
-                const res = await axios.get('/complaint/api/pastcomplaint/', config);
+                const res = await axios.get('/complaint/api/', config);
                 console.log(res.data);
                 this.setState({
                     complaintData:res.data
@@ -68,6 +67,11 @@ class PastComplaint extends Component{
                                 </div>
                             </div>
                         </div>
+                    
+                    // <div className={Styles.complaint}>
+                    //     <h4>{complaint.Category}</h4>
+                    //     <p>{complaint.description}</p>
+                    // </div>
                     );
                 })}
             </div>
@@ -75,36 +79,4 @@ class PastComplaint extends Component{
     }
 }
 
-export default PastComplaint;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from 'react';
-// import Styles from './Components.module.css';
-
-// const PastComplaint = ()=>{
-//     return(
-//         <div>
-//             <button className={`${Styles.btn} ${Styles.fill_button}`}>PastComplaint </button>
-//             <button className={`${Styles.btn} ${Styles.empty_button}`}>PastComplaint </button>
-//         </div>
-//     );
-// }
-
-// export default PastComplaint;
+export default Home;

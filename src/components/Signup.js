@@ -1,48 +1,68 @@
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login } from '../actions/auth';
+import { Link, Redirect } from 'react-router-dom';
+import { signup } from '../actions/auth';
 
-const Login = ({ login, isAuthenticated }) => {
+const Signup = ({ signup, isAuthenticated }) => {
     const [formData, setFormData] = useState({
+        name: '',
         email: '',
-        password: ''
+        password: '',
+        re_password: ''
     });
 
-    const { email, password } = formData;
+    const [accountCreated, setAccountCreated] = useState(false);
+
+    const { name, email, password, re_password } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const onSubmit = e => {
         e.preventDefault();
 
-        login(email, password);
+        if (password === re_password) {
+            signup({ name, email, password, re_password });
+            setAccountCreated(true);
+        }
     };
 
     if (isAuthenticated)
         return <Redirect to='/' />;
+    if (accountCreated)
+        return <Redirect to='login' />;
     
     return (
         <div className='container mt-5'>
-            <h1>Sign In</h1>
-            <p>Sign into your Account</p>
+            <h1>Sign Up</h1>
+            <p>Create your Account</p>
             <form onSubmit={e => onSubmit(e)}>
                 <div className='form-group'>
                     <input 
                         className='form-control'
+                        type='text'
+                        placeholder='Name*'
+                        name='name'
+                        value={name}
+                        onChange={e => onChange(e)}
+                        required 
+                    />
+                </div>
+                <div className='form-group'>
+                    <input 
+                        className='form-control'
                         type='email'
-                        placeholder='Email'
+                        placeholder='Email*'
                         name='email'
                         value={email}
                         onChange={e => onChange(e)}
-                        required
+                        required 
                     />
                 </div>
                 <div className='form-group'>
                     <input
                         className='form-control'
                         type='password'
-                        placeholder='Password'
+                        placeholder='Password*'
                         name='password'
                         value={password}
                         onChange={e => onChange(e)}
@@ -50,25 +70,33 @@ const Login = ({ login, isAuthenticated }) => {
                         required
                     />
                 </div>
-                <button className='btn btn-primary' type='submit'>Login</button>
+                <div className='form-group'>
+                    <input
+                        className='form-control'
+                        type='password'
+                        placeholder='Confirm Password*'
+                        name='re_password'
+                        value={re_password}
+                        onChange={e => onChange(e)}
+                        minLength='6'
+                        required
+                    />
+                </div>
+                <button className='btn btn-primary' type='submit'>Register</button>
             </form>
             <p className='mt-3'>
-            Don't have an account? <Link to='/signup'>Sign Up</Link>
-            </p>
-            <p className='mt-3'>
-            Forgot your Password? <Link to='/reset_password'>Reset Password</Link>
+                Already have an account? <Link to='/login'>Sign In</Link>
             </p>
         </div>
     );
+
 };
 
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
-});
+})
 
-export default connect(mapStateToProps, { login })(Login);
-
-
+export default connect(mapStateToProps, { signup })(Signup);
 
 
 
@@ -90,13 +118,13 @@ export default connect(mapStateToProps, { login })(Login);
 
 
 
-// import React,{Component, useState} from 'react';
+
+
+// import React,{Component} from 'react';
 // import {Link} from 'react-router-dom';
-// import {connect} from 'react-redux';
-
 // import Styles from './Components.module.css';
 
-// class Login extends Component{
+// class Signup extends Component{
 //     constructor(props){
 //         super(props);
 //         this.state={
@@ -122,6 +150,9 @@ export default connect(mapStateToProps, { login })(Login);
 //         return (
 //             <div className="row" >
 //                 <div className="col-md-5 mx-auto my-5">
+//                 <button className={`${Styles.btn} ${Styles.fill_button}`}><Link to="/eregister" className={Styles.navlink}>Register as an Employee</Link></button>
+//                     <p>OR</p>
+//                     <h3>Register as an User</h3>
 //                     <form method="GET">
 //                         <div className={Styles.C_input}>
 //                             <input onChange={this.onChangeInput}  type="text" name="username" placeholder="Username"/><br/> 
@@ -130,15 +161,8 @@ export default connect(mapStateToProps, { login })(Login);
 //                             <input onChange={this.onChangeInput} type="password" name="password" placeholder="Password"/><br/> 
 //                         </div> 
 
-//                         <div className="row">
-//                             <div className="col-md-5 mx-auto" >
-//                                 <button onClick={this.handleLogin} className={`${Styles.btn} ${Styles.fill_button}`}>Login</button>
-//                             </div>
-//                             <div className="col-md-5 mx-auto" >
-//                                 <p>Don't have an account then  </p>
-//                                 <button className={`${Styles.btn} ${Styles.fill_button}`}><Link to="/uregister" className={Styles.navlink}>Register</Link></button>
-//                             </div>
-//                         </div>
+//                         <button onClick={this.handleLogin} className={`${Styles.btn} ${Styles.fill_button}`}>Register</button>
+                        
 //                     </form>
 //                 </div>
 //             </div>
@@ -147,4 +171,4 @@ export default connect(mapStateToProps, { login })(Login);
 //     }
 // }
 
-// export default Login;
+// export default Signup;

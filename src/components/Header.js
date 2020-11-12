@@ -3,15 +3,21 @@ import {NavLink,Link} from 'react-router-dom'
 import Styles from './Components.module.css';
 import { Navbar, NavbarBrand,Nav, NavbarToggler, Collapse , NavItem } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faPlusSquare, faArchive, faSignInAlt } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faPlusSquare, faArchive, faSignInAlt ,faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
+import { connect } from 'react-redux';
+import { logout } from '../actions/auth';
+import { LOGOUT } from '../actions/types';
+import store from '../store';
 
-export default class Header extends Component{
+class Header extends Component{
     constructor(props){
         super(props);
         this.state={
             isNavOpen:false,
         };
+        // handlelogout
         this.toggleNav=this.toggleNav.bind(this);
+        this.handlelogout=this.handlelogout.bind(this);
     }
 
     toggleNav(){
@@ -19,6 +25,11 @@ export default class Header extends Component{
             isNavOpen:!this.state.isNavOpen
         });
     }
+
+    handlelogout(){
+        store.dispatch({ type: LOGOUT });
+    }
+
 
     render(){
         return(
@@ -40,12 +51,22 @@ export default class Header extends Component{
                                 <FontAwesomeIcon icon={faArchive} />&nbsp;Past Complaints&nbsp;&nbsp;
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
+                            {/* {console.log(isAuthenticated)} */}
+                            {
+                                this.props.isAuthenticated?
+                                <NavItem>
+                                <NavLink className={`${Styles.navlink}`} to='#!' onClick={this.handlelogout}>
+                                <FontAwesomeIcon icon={faSignOutAlt} />&nbsp;Logout
+                                </NavLink>
+                                </NavItem>:
+                                <NavItem>
                                 <NavLink className={`${Styles.navlink}`} to="/login">
                                 <FontAwesomeIcon icon={faSignInAlt} />&nbsp;Login
                                 </NavLink>
-                            </NavItem>
+                                </NavItem>
+                                
 
+                            }
                         </Nav>
                     </Collapse>
                     
@@ -55,3 +76,11 @@ export default class Header extends Component{
         );
     }
 }
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { logout })(Header);
+
+// store.dispatch({ type: LOGOUT })

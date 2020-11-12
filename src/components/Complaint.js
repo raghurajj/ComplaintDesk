@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import Styles from './Components.module.css';
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-
+import axios from 'axios';
 
 const Map = ReactMapboxGl({
     accessToken:
@@ -50,8 +50,36 @@ class Complaint extends Component{
         })
     }
 
-    handleSubmit(event){
+    async handleSubmit(event){
         event.preventDefault();
+        if (localStorage.getItem('access')) {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `JWT ${localStorage.getItem('access')}`,
+                    'Accept': 'application/json'
+                }
+            };
+    
+
+            const res = await axios.get('/auth/users/me/', config);
+            // console.log(res);
+            const author = res.data.id;
+            const Category = this.state.topic;
+            const description = this.state.description;
+            const latitude = this.state.lattitude;
+            const longitude = this.state.longitude;
+            const body = JSON.stringify({author, Category,description,latitude,longitude});
+            console.log(body);
+            try {
+                const res = await axios.post('/complaint/api/',body, config);
+                console.log("compliant post success");
+            
+            } catch (err) {
+                console.log("compliant post failed");
+            }
+        } 
+
     }
 
     onClickMap(map, evt) {
@@ -83,9 +111,9 @@ class Complaint extends Component{
                                 <input onChange={this.onChangeInput} type="number" name="longitude" placeholder="Longitude" value={this.state.longitude}/><br/> 
                             </div> 
 
-                            <div className={Styles.C_input}>
+                            {/* <div className={Styles.C_input}>
                                 <input type="file" name="image" placeholder="image" /><br/> 
-                            </div>
+                            </div> */}
                             <div className="row">
                                 <div className="col-md-5 mx-auto" >
                                 <button onClick={this.getLocation }   className={`${Styles.btn} ${Styles.fill_button}`}>getlocation</button>
