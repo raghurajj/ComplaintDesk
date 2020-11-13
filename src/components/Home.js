@@ -50,7 +50,7 @@ class Home extends Component{
     render(){
         
         return(
-            <div>
+            <div className={Styles.container}>
                 {this.state.complaintData &&
                 this.state.complaintData.map(complaint => {
 
@@ -61,17 +61,10 @@ class Home extends Component{
                                 {complaint.Category}
                                 </div>
                                 <div className="card-body">
-                                    {/* <h5 className="card-title">Special title treatment</h5> */}
                                     <p className="card-text">{complaint.description}</p>
-                                    {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
                                 </div>
                             </div>
                         </div>
-                    
-                    // <div className={Styles.complaint}>
-                    //     <h4>{complaint.Category}</h4>
-                    //     <p>{complaint.description}</p>
-                    // </div>
                     );
                 })}
             </div>

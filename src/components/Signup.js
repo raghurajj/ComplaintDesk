@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { signup } from '../actions/auth';
+import Styles from './Components.module.css';
 
 const Signup = ({ signup, isAuthenticated }) => {
     const [formData, setFormData] = useState({
@@ -32,61 +33,65 @@ const Signup = ({ signup, isAuthenticated }) => {
         return <Redirect to='login' />;
     
     return (
-        <div className='container mt-5'>
-            <h1>Sign Up</h1>
-            <p>Create your Account</p>
-            <form onSubmit={e => onSubmit(e)}>
-                <div className='form-group'>
-                    <input 
-                        className='form-control'
-                        type='text'
-                        placeholder='Name*'
-                        name='name'
-                        value={name}
-                        onChange={e => onChange(e)}
-                        required 
-                    />
+        <div className={Styles.fitpage}>
+            <div className='row'>
+                <div className="col-md-5 mx-auto my-auto"> 
+                    <h1>Sign Up</h1>
+                    <p>Create your Account</p>
+                    <form onSubmit={e => onSubmit(e)}>
+                        <div className='form-group'>
+                            <input 
+                                className='form-control'
+                                type='text'
+                                placeholder='Name*'
+                                name='name'
+                                value={name}
+                                onChange={e => onChange(e)}
+                                required 
+                            />
+                        </div>
+                        <div className='form-group'>
+                            <input 
+                                className='form-control'
+                                type='email'
+                                placeholder='Email*'
+                                name='email'
+                                value={email}
+                                onChange={e => onChange(e)}
+                                required 
+                            />
+                        </div>
+                        <div className='form-group'>
+                            <input
+                                className='form-control'
+                                type='password'
+                                placeholder='Password*'
+                                name='password'
+                                value={password}
+                                onChange={e => onChange(e)}
+                                minLength='6'
+                                required
+                            />
+                        </div>
+                        <div className='form-group'>
+                            <input
+                                className='form-control'
+                                type='password'
+                                placeholder='Confirm Password*'
+                                name='re_password'
+                                value={re_password}
+                                onChange={e => onChange(e)}
+                                minLength='6'
+                                required
+                            />
+                        </div>
+                        <button className={`${Styles.btn} ${Styles.fill_button}`}  type='submit'>Register</button>
+                    </form>
+                    <p className='mt-3'>
+                        Already have an account? <Link to='/login'>Sign In</Link>
+                    </p>
                 </div>
-                <div className='form-group'>
-                    <input 
-                        className='form-control'
-                        type='email'
-                        placeholder='Email*'
-                        name='email'
-                        value={email}
-                        onChange={e => onChange(e)}
-                        required 
-                    />
-                </div>
-                <div className='form-group'>
-                    <input
-                        className='form-control'
-                        type='password'
-                        placeholder='Password*'
-                        name='password'
-                        value={password}
-                        onChange={e => onChange(e)}
-                        minLength='6'
-                        required
-                    />
-                </div>
-                <div className='form-group'>
-                    <input
-                        className='form-control'
-                        type='password'
-                        placeholder='Confirm Password*'
-                        name='re_password'
-                        value={re_password}
-                        onChange={e => onChange(e)}
-                        minLength='6'
-                        required
-                    />
-                </div>
-                <button className='btn btn-primary' type='submit'>Register</button>
-            </form>
-            <p className='mt-3'>
-                Already have an account? <Link to='/login'>Sign In</Link>
-            </p>
+            </div>
         </div>
     );
 

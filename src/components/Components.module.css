@@ -1,6 +1,8 @@
 * {
     margin: 0;
-    padding: 0; }
+    padding: 0;
+}
+
 
 html{
   box-sizing: border-box;
@@ -8,6 +10,7 @@ html{
 
 .nvbr{
     background-color: #4C1E51 ;
+    min-height: 10vh;
 }
 
 .navlink{
@@ -27,6 +30,12 @@ html{
 /* .abslt{
     position: relative;
 } */
+
+.container{
+    background-color: #2D0A31; 
+    padding-bottom: 5vh;
+    min-height: 90vh;
+}
 
 .btn {
     padding: 0.9rem 2rem;
@@ -90,17 +99,52 @@ html{
 }
 
 .C_input > textarea{
+    max-height:20vh;
     width: 100%;
 }
 
 h1{
-    color:brown;
+    color:white;
+    font-family: "Poppins",sans-serif;
     margin: auto;
-    margin-top: 10vh;
+    padding-top: 5vh;
 }
+
+p{
+    color:white;
+}
+
 
 .complaint{
     margin: auto;
-    margin-top: 5vh;
-    width:50vw;
+    padding-top: 10vh;
+    width:50vw; 
+}
+
+/* .complaint > :last-child{
+    padding-bottom: 5vh;
+} */
+
+
+.linkk{
+    color: black;
+    text-decoration: none;    
+}
+
+.linkk:hover{
+    color: rgb(114,27,213);
+    text-decoration: none;
+}
+
+.c_detail{
+    margin: auto;
+}
+
+.fitpage{
+    background-color: #2D0A31;
+    height: 90vh;
+}
+
+.overflow_scroll{
+    overflow: scroll;
 }

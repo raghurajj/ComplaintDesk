@@ -13,7 +13,7 @@ import ResetPassword from './components/ResetPassword';
 import ResetPasswordConfirm from './components/ResetPasswordConfirm';
 import Activate from './components/Activate';
 import Default from './components/Default';
-
+import ComplaintDetail from './components/ComplaintDetail';
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -26,6 +26,7 @@ function App() {
           <Route exact path='/' component={Home} />
           <Route exact path="/newcomplaint" component={Complaint} />
           <Route exact path="/pastcomplaints" component={PastComplaints} />
+          <Route exact path="/complaintdetail/:pk" component={ComplaintDetail} />
           <Route exact path="/login" component={Login} />
           <Route exact path='/signup' component={Signup} />
           <Route exact path='/reset_password' component={ResetPassword} />

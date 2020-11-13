@@ -33,7 +33,7 @@ class Header extends Component{
 
     render(){
         return(
-            <Navbar dark className={`${Styles.nvbr}`} expand="md">
+            <Navbar dark className={`sticky-top ${Styles.nvbr}`} expand="md">
                 <div className="container" >
                     <NavbarToggler onClick={this.toggleNav} className={Styles.abslt}/>
                     <NavbarBrand  className="mr-auto ">

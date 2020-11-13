@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import Styles from './Components.module.css';
+import {Link} from 'react-router-dom'
+
 
 
 class PastComplaint extends Component{
@@ -44,30 +46,31 @@ class PastComplaint extends Component{
         if (this.props.id !== prevProps.id) {
           this.LoadData();
         }
-      }
+    }
 
     
     
     render(){
         
         return(
-            <div>
+            <div className={Styles.container}>
                 {this.state.complaintData &&
                 this.state.complaintData.map(complaint => {
+                    {console.log(complaint.pk)}
 
                     return (
-                        <div className={Styles.complaint}>
-                            <div className="card">
-                                <div className="card-header">
-                                {complaint.Category}
-                                </div>
-                                <div className="card-body">
-                                    {/* <h5 className="card-title">Special title treatment</h5> */}
-                                    <p className="card-text">{complaint.description}</p>
-                                    {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
+                        <Link className={Styles.linkk} to={`complaintdetail/${complaint.pk}`}>
+                            <div className={Styles.complaint}>
+                                <div className="card">
+                                    <div className="card-header">
+                                    <h4>{complaint.Category}</h4>
+                                    </div>
+                                    <div className="card-body">
+                                        <p className="card-text">{complaint.description}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     );
                 })}
             </div>

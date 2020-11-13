@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reset_password } from '../actions/auth';
+import Styles from './Components.module.css';
 
 const ResetPassword = (props) => {
     const [requestSent, setRequestSent] = useState(false);
@@ -24,22 +25,24 @@ const ResetPassword = (props) => {
     if (requestSent)
         return <Redirect to='/' />
     return (
-        <div className='container mt-5'>
-            <h1>Request Password Reset:</h1>
-            <form onSubmit={e => onSubmit(e)}>
-                <div className='form-group'>
-                    <input 
-                        className='form-control'
-                        type='email'
-                        placeholder='Your Email'
-                        name='email'
-                        value={email}
-                        onChange={e => onChange(e)}
-                        required
-                    />
-                </div>
-                <button className='btn btn-primary' type='submit'>Reset Password</button>
-            </form>
+        <div className={Styles.container}>
+            <div className='container'>
+                <h1>Request Password Reset:</h1>
+                <form onSubmit={e => onSubmit(e)}>
+                    <div className='form-group'>
+                        <input 
+                            className='form-control'
+                            type='email'
+                            placeholder='Your Email'
+                            name='email'
+                            value={email}
+                            onChange={e => onChange(e)}
+                            required
+                        />
+                    </div>
+                    <button className={`${Styles.btn} ${Styles.fill_button}`} type='submit'>Reset Password</button>
+                </form>
+            </div>
         </div>
     );
 };

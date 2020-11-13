@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reset_password_confirm } from '../actions/auth';
+import Styles from './Components.module.css';
 
 const ResetPasswordConfirm = (props) => {
     const [requestSent, setRequestSent] = useState(false);
@@ -28,34 +29,36 @@ const ResetPasswordConfirm = (props) => {
     if (requestSent)
         return <Redirect to='/' />
     return (
-        <div className='container mt-5'>
-            <form onSubmit={e => onSubmit(e)}>
-                <div className='form-group'>
-                    <input 
-                        className='form-control'
-                        type='password'
-                        placeholder='New Password'
-                        name='new_password'
-                        value={new_password}
-                        onChange={e => onChange(e)}
-                        minLength='6'
-                        required
-                    />
-                </div>
-                <div className='form-group'>
-                    <input
-                        className='form-control'
-                        type='password'
-                        placeholder='Confirm New Password'
-                        name='re_new_password'
-                        value={re_new_password}
-                        onChange={e => onChange(e)}
-                        minLength='6'
-                        required
-                    />
-                </div>
-                <button className='btn btn-primary' type='submit'>Reset Password</button>
-            </form>
+        <div className={Styles.container}>
+            <div className='container'>
+                <form onSubmit={e => onSubmit(e)}>
+                    <div className='form-group'>
+                        <input 
+                            className='form-control'
+                            type='password'
+                            placeholder='New Password'
+                            name='new_password'
+                            value={new_password}
+                            onChange={e => onChange(e)}
+                            minLength='6'
+                            required
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <input
+                            className='form-control'
+                            type='password'
+                            placeholder='Confirm New Password'
+                            name='re_new_password'
+                            value={re_new_password}
+                            onChange={e => onChange(e)}
+                            minLength='6'
+                            required
+                        />
+                    </div>
+                    <button className={`${Styles.btn} ${Styles.fill_button}`} type='submit'>Reset Password</button>
+                </form>
+            </div>
         </div>
     );
 };

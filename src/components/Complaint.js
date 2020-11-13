@@ -91,7 +91,7 @@ class Complaint extends Component{
 
     render(){
         return(
-            <div>
+            <div className={Styles.fitpage}>
                 <div className="row">
                     <h1>Add a New Complaint</h1>
                 </div>
@@ -126,16 +126,18 @@ class Complaint extends Component{
                         </form>
                     </div>
                     <div className="col">
-                        <Map
-                            style="mapbox://styles/mapbox/streets-v9"
-                            containerStyle={{
-                                height: '50vh',
-                                width: '50vw'
-                            }}
-                            center={[80.94615925,26.8467088]}
-                            zoom={[9]}
-                            onClick={this.onClickMap}
-                        />
+                        <div >
+                            <Map
+                                style="mapbox://styles/mapbox/streets-v9"
+                                containerStyle={{
+                                    height: '60vh',
+                                    width: '45vw'
+                                }}
+                                center={[80.94615925,26.8467088]}
+                                zoom={[9]}
+                                onClick={this.onClickMap}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
