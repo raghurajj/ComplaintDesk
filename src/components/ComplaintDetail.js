@@ -3,6 +3,7 @@ import Styles from './Components.module.css';
 import ReactMapboxGl, { Layer, Feature,Marker } from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import axios from 'axios';
+import { Spring } from 'react-spring/renderprops'; 
 
 const Map = ReactMapboxGl({
     accessToken:
@@ -30,7 +31,7 @@ class ComplaintDetail extends Component{
             };
 
             try {
-                const pk = window.location.pathname.slice(-1);
+                const pk = (window.location.pathname.split('/'))[2];
                 const url = '/complaint/api/pastcomplaint/'+pk+'/';
                 const res = await axios.get(url, config);
                 console.log(res.data);
@@ -56,48 +57,58 @@ class ComplaintDetail extends Component{
     }
 
     render(){
-        const pathname = window.location.pathname.slice(-1);
-        console.log(this.state.complaintData[0])
         return(
-            <div>
-                <div className="row">
-                    <h1>{this.state.complaintData[0]?this.state.complaintData[0].Category:null}</h1>
-                </div>
-                <div className="row my-5 mx-5">
-                    <div className={`col ${Styles.c_detail}`}>
-                        <p>{this.state.complaintData[0]?this.state.complaintData[0].description:null}</p>
-                        <br/>
-                        <p>{this.state.complaintData[0]?this.state.complaintData[0].latitude:null}</p>
-                        <p>{this.state.complaintData[0]?this.state.complaintData[0].longitude:null}</p>
+            <Spring
+                from={{opacity:0,marginLeft:-500}}
+                to={{opacity:1,marginLeft:0}}
+                config={{duration:1000}}
+                >
+                    {props =>(
+                    <div style={props}>
+                         <div className={Styles.container}>
+                            <div className="row">
+                                <h1>{this.state.complaintData[0]?this.state.complaintData[0].Category:'Category'}</h1>
+                            </div>
+                            <div className="row my-5 mx-5">
+                                <div className={`col-10 col-md-5 mt-3 ${Styles.c_detail}`}>
+                                    <p>{this.state.complaintData[0]?this.state.complaintData[0].description:'description'}</p>
+                                    <br/>
+                                    <p>{this.state.complaintData[0]?this.state.complaintData[0].latitude:'latitude'}</p>
+                                    <p>{this.state.complaintData[0]?this.state.complaintData[0].longitude:'longitude'}</p>
+                                </div>
+                                <div className="col-10 col-md-5 pr-5">
+                                    <Map
+                                        style="mapbox://styles/mapbox/streets-v9"
+                                        containerStyle={{
+                                            height: '60vh',
+                                            width: '40vw'
+                                        }}
+                                        center={this.state.complaintData[0]?[this.state.complaintData[0].longitude,this.state.complaintData[0].latitude]:[80.94615925,26.8467088]}
+                                        zoom={[5]}
+                                    >
+                                        {this.state.complaintData[0]?
+                                        <Marker
+                                            coordinates={[this.state.complaintData[0].longitude,this.state.complaintData[0].latitude]}
+                                            anchor="bottom"
+                                            width='10px'
+                                            height='10px'>
+                                            <div className={Styles.mapMarkerStyle} />
+                                        </Marker>:
+                                        <Marker
+                                            coordinates={[80.94615925, 26.8467088]}
+                                            anchor="bottom"
+                                            width='10px'
+                                            height='10px'>
+                                            <div className={Styles.mapMarkerStyle} />
+                                        </Marker>
+                                        }
+                                    </Map>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="col">
-                        <Map
-                            style="mapbox://styles/mapbox/streets-v9"
-                            containerStyle={{
-                                height: '50vh',
-                                width: '50vw'
-                            }}
-                            center={[80.94615925,26.8467088]}
-                            zoom={[9]}
-                        >
-                            <Layer
-                                type="circle"
-                                id="marker"
-                                paint={{
-                                    "circle-color": "#ff5200",
-                                    "circle-stroke-width": 1,
-                                    "circle-stroke-color": "#fff",
-                                    "circle-stroke-opacity": 1
-                                }}
-                                >
-                                <Feature coordinates={[-0.132, 51.518]} />
-                                <Feature coordinates={[-0.142, 51.518]} />
-                            </Layer>
-                        </Map>
-                    </div>
-                </div>
-            </div>
-            
+                    )}
+            </Spring>
         );
     }
 }

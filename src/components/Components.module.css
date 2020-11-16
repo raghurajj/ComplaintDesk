@@ -6,6 +6,7 @@
 
 html{
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .nvbr{
@@ -96,6 +97,7 @@ html{
     outline: none;
     background: none;
     padding-left: 8px;
+    color:white;
 }
 
 .C_input > textarea{
@@ -105,9 +107,13 @@ html{
 
 h1{
     color:white;
-    font-family: "Poppins",sans-serif;
+    
     margin: auto;
     padding-top: 5vh;
+}
+
+h1,h2,h3,h4,h5{
+    font-family: "Poppins",sans-serif;
 }
 
 p{
@@ -119,11 +125,13 @@ p{
     margin: auto;
     padding-top: 10vh;
     width:50vw; 
+    color:black;
 }
 
-/* .complaint > :last-child{
-    padding-bottom: 5vh;
-} */
+.blackk{
+    color: black;
+}
+
 
 
 .linkk{
@@ -142,9 +150,22 @@ p{
 
 .fitpage{
     background-color: #2D0A31;
-    height: 90vh;
+    min-height: 90vh;
 }
 
 .overflow_scroll{
     overflow: scroll;
 }
+
+.mapMarkerStyle {
+    background-color: red;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: block;
+    left: -0.5rem;
+    top: -0.5rem;
+    position: relative;
+    border-radius: 1.5rem 1.5rem 0;
+    transform: rotate(45deg);
+    border: 1px solid #FFFFFF;
+  }

@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import Styles from './Components.module.css';
-
+import {Link} from 'react-router-dom';
+import { Spring } from 'react-spring/renderprops'; 
 
 class Home extends Component{
     constructor(props){
@@ -50,24 +51,36 @@ class Home extends Component{
     render(){
         
         return(
-            <div className={Styles.container}>
-                {this.state.complaintData &&
-                this.state.complaintData.map(complaint => {
+            <Spring
+            from={{opacity:0,marginLeft:-500}}
+            to={{opacity:1,marginLeft:0}}
+            config={{duration:1000}}
+            >
+                {props =>(
+                   <div style={props}>
+                       <div className={Styles.container}>
+                            {this.state.complaintData &&
+                            this.state.complaintData.map(complaint => {
 
-                    return (
-                        <div className={Styles.complaint}>
-                            <div className="card">
-                                <div className="card-header">
-                                {complaint.Category}
-                                </div>
-                                <div className="card-body">
-                                    <p className="card-text">{complaint.description}</p>
-                                </div>
-                            </div>
+                                return (
+                                    <Link className={Styles.linkk} to={`complaintdetail/${complaint.pk}`}>
+                                        <div className={Styles.complaint}>
+                                            <div className="card">
+                                                <div className="card-header">
+                                                <h4>{complaint.Category}</h4>
+                                                </div>
+                                                <div className="card-body">
+                                                    <p className={`card-text ${Styles.blackk}`}>{complaint.description}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                );
+                            })}
                         </div>
-                    );
-                })}
-            </div>
+                   </div> 
+                )}
+            </Spring>
         );
     }
 }
