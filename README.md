@@ -1,10 +1,9 @@
 # ComplaintDesk
 
 ---
-ShopsNearYou is a platfrom where people can register complaints regarding the problem they face, and the gov-employees on the other side can check that complaint and mark the complaint solved/pending according to its status.
+ComplaintDesk is a platfrom where people can register complaints regarding the problem they face, and the gov-employees on the other side can check that complaint and mark the complaint solved/pending according to its status.
 
 
-![Home Screen](images/Home.png)
 
 # Features
     -Complaint author can Add/Update/Delete their complaints
@@ -18,29 +17,39 @@ ShopsNearYou is a platfrom where people can register complaints regarding the pr
     -website is completely responsive
 
 ### Screenshots
+
 -User Registration Page
-![Register Screen](screenshots/Signup.png)
+
+![Register Screen](images/Signup.png)
 
 ---
 
 -Employee Registration Page
-![Register Screen](screenshots/EmployeeSignup.png)
+
+![Employee Register Screen](images/EmployeeSignup.png)
 
 ---
 
 -Login Page
-![Register Screen](screenshots/Signin.png)
+
+![Login Screen](images/Signin.png)
 
 ---
 
 -Home Page
 
-![Shop Detail Screen](screenshots/Home.png)
+![Home Screen](images/Home.png)
 
 ---
 -Add Complaint Page
 
-![Pre packaging Screen](screenshots/AddComplaint.png)
+![Add Complaint Screen](images/AddComplaint.png)
+
+---
+
+-Complaint Detail Page
+
+![Complaint Detail Screen](images/ComplaintDetail.png)
 
 ---
 
