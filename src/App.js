@@ -16,13 +16,15 @@ import Default from './components/Default';
 import ComplaintDetail from './components/ComplaintDetail';
 import { Provider } from 'react-redux';
 import store from './store';
+import Layout from './hocs/Layout';
+
 
 function App() {
   return (
     <div>
       <Provider store={store}>
-        <Header/>
-        <Switch>
+        <Layout>
+        <Switch> 
           <Route exact path='/' component={Home} />
           <Route exact path="/newcomplaint" component={Complaint} />
           <Route exact path="/pastcomplaints" component={PastComplaints} />
@@ -35,6 +37,7 @@ function App() {
           <Route component={Default} />
           
         </Switch>
+        </Layout>
       </Provider>
     </div>
   );

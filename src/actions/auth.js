@@ -14,8 +14,77 @@ import {
     USER_LOADED_SUCCESS,
     USER_LOADED_FAIL,
     AUTHENTICATED_FAIL,
-    AUTHENTICATED_SUCCESS
+    AUTHENTICATED_SUCCESS,
+    GOOGLE_AUTH_SUCCESS,
+    GOOGLE_AUTH_FAIL
 } from './types';
+
+export const load_user = () => async dispatch => {
+    if (localStorage.getItem('access')) {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `JWT ${localStorage.getItem('access')}`,
+                'Accept': 'application/json'
+            }
+        };
+
+        // console.log(config);
+
+        try {
+            const res = await axios.get('/auth/users/me/', config);
+
+            dispatch({
+                type: USER_LOADED_SUCCESS,
+                payload: res.data
+            });
+        } catch (err) {
+            // console.log("yupp");
+            dispatch({
+                type: USER_LOADED_FAIL
+            });
+        }
+    } else {
+        // console.log("ntt");
+        dispatch({
+            type: USER_LOADED_FAIL
+        });
+    }
+};
+
+export const googleAuthenticate =(state,code) => async dispatch=>{
+    if(state && code && !localStorage.getItem('access')){
+        const config={
+            headers:{
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        };
+
+        const details ={
+            'state':state,
+            'code':code
+        };
+
+        const formBody = Object.keys(details).map(key => encodeURIComponent(key)+ '=' + encodeURIComponent(details[key])).join('&');
+
+        try{
+            const res = await axios.post(`/auth/o/google-oauth2/?${formBody}`, config);
+
+            dispatch({
+                type:GOOGLE_AUTH_SUCCESS,
+                payload:res.data
+            });
+
+            dispatch(load_user());
+        }catch(err){
+            dispatch({
+                type:GOOGLE_AUTH_FAIL
+            });
+
+        }
+    }
+}
+
 
 export const checkAuthenticated = () => async dispatch => {
     if (typeof window == 'undefined') {
@@ -57,38 +126,6 @@ export const checkAuthenticated = () => async dispatch => {
     }
 };
 
-export const load_user = () => async dispatch => {
-    if (localStorage.getItem('access')) {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `JWT ${localStorage.getItem('access')}`,
-                'Accept': 'application/json'
-            }
-        };
-
-        // console.log(config);
-
-        try {
-            const res = await axios.get('/auth/users/me/', config);
-
-            dispatch({
-                type: USER_LOADED_SUCCESS,
-                payload: res.data
-            });
-        } catch (err) {
-            // console.log("yupp");
-            dispatch({
-                type: USER_LOADED_FAIL
-            });
-        }
-    } else {
-        // console.log("ntt");
-        dispatch({
-            type: USER_LOADED_FAIL
-        });
-    }
-};
 
 export const login = (email, password) => async dispatch => {
     const config = {
@@ -115,14 +152,14 @@ export const login = (email, password) => async dispatch => {
     }
 };
 
-export const signup = ({ name, email, password, re_password }) => async dispatch => {
+export const signup = ({ firstname,lastname, email, password, re_password }) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     }
 
-    const body = JSON.stringify({ name, email, password, re_password }); 
+    const body = JSON.stringify({ firstname,lastname, email, password, re_password }); 
 
     try {
         const res = await axios.post('/auth/users/', body, config);

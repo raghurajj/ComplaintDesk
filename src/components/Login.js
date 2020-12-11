@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { login } from '../actions/auth';
 import Styles from './Components.module.css';
 import { Spring } from 'react-spring/renderprops'; 
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebook, faGoogle, faTwitter } from "@fortawesome/free-brands-svg-icons"
 
 
 const Login = ({ login, isAuthenticated }) => {
@@ -20,6 +23,16 @@ const Login = ({ login, isAuthenticated }) => {
         e.preventDefault();
 
         login(email, password);
+    };
+
+    const continueWithGoogle = async()=>{
+        try{
+            const res = await axios.get('/auth/o/google-oauth2/?redirect_uri=http://localhost:8000')
+            window.location.replace(res.data.authorization_url);
+        }
+        catch(err){
+            // co
+        }
     };
 
     if (isAuthenticated)
@@ -57,13 +70,26 @@ const Login = ({ login, isAuthenticated }) => {
                                             placeholder='Password'
                                             name='password'
                                             value={password}
-                                            onChange={e => onChange(e)}
+                                            onChange={e => onChange(e)} 
                                             minLength='6'
                                             required
                                         />
                                     </div>
                                     <button className={`${Styles.btn} ${Styles.fill_button}`} type='submit'>Login</button>
                                 </form>
+
+                                <p className='mt-3'>
+                                        OR
+                                </p>
+                                <p className='mt-3'>
+                                    <button className="btn btn-danger" onClick={continueWithGoogle}><FontAwesomeIcon icon={faGoogle} /> &nbsp;Continue with google</button>
+                                </p>
+                                <p className='mt-3'>
+                                    <button className="btn btn-primary" onClick={continueWithGoogle}><FontAwesomeIcon icon={faFacebook} /> &nbsp; Continue with facebook</button>
+                                </p>
+                                <p className='mt-3'>
+                                    <button className="btn btn-success" onClick={continueWithGoogle}><FontAwesomeIcon icon={faTwitter} /> &nbsp;Continue with twitter</button>
+                                </p>
                                 <p className='mt-3'>
                                 Don't have an account? <Link to='/signup'>Sign Up</Link>
                                 </p>

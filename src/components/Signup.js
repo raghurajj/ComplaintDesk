@@ -4,19 +4,24 @@ import { Link, Redirect } from 'react-router-dom';
 import { signup } from '../actions/auth';
 import Styles from './Components.module.css';
 import { Spring } from 'react-spring/renderprops'; 
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebook, faGoogle, faTwitter } from "@fortawesome/free-brands-svg-icons"
 
 
 const Signup = ({ signup, isAuthenticated }) => {
     const [formData, setFormData] = useState({
-        name: '',
+        firstname: '',
+        lastname:'',
         email: '',
         password: '',
-        re_password: ''
+        re_password: '',
+        is_employee:false
     });
 
     const [accountCreated, setAccountCreated] = useState(false);
 
-    const { name, email, password, re_password } = formData;
+    const { firstname,lastname, email, password, re_password } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -24,8 +29,19 @@ const Signup = ({ signup, isAuthenticated }) => {
         e.preventDefault();
 
         if (password === re_password) {
-            signup({ name, email, password, re_password });
+            signup({ firstname,lastname, email, password, re_password });
             setAccountCreated(true);
+        }
+    };
+    const continueWithGoogle = async()=>{
+        try{
+            console.log('yee');
+            const res = await axios.get('/auth/o/google-oauth2/?redirect_uri=http://localhost:8000');
+            console.log(res);
+            window.location.replace(res.data.authorization_url);
+        }
+        catch(err){
+            // co
         }
     };
 
@@ -52,9 +68,20 @@ const Signup = ({ signup, isAuthenticated }) => {
                                             <input 
                                                 className='form-control'
                                                 type='text'
-                                                placeholder='Name*'
-                                                name='name'
-                                                value={name}
+                                                placeholder='First Name'
+                                                name='firstname'
+                                                value={firstname}
+                                                onChange={e => onChange(e)}
+                                                required 
+                                            />
+                                        </div>
+                                        <div className='form-group'>
+                                            <input 
+                                                className='form-control'
+                                                type='text'
+                                                placeholder='Last Name'
+                                                name='lastname'
+                                                value={lastname}
                                                 onChange={e => onChange(e)}
                                                 required 
                                             />
@@ -94,8 +121,32 @@ const Signup = ({ signup, isAuthenticated }) => {
                                                 required
                                             />
                                         </div>
+                                        {/* <div className='form-group'>
+                                            <input
+                                                className='form-control'
+                                                type="checkbox"
+                                                placeholder='Confirm Password*'
+                                                name='re_password'
+                                                value={re_password}
+                                                onChange={e => onChange(e)}
+                                                minLength='6'
+                                                required
+                                            />
+                                        </div> */}
                                         <button className={`${Styles.btn} ${Styles.fill_button}`}  type='submit'>Register</button>
                                     </form>
+                                    <p className='mt-3'>
+                                        OR
+                                    </p>
+                                    <p className='mt-3'>
+                                        <button className="btn btn-danger" onClick={continueWithGoogle}><FontAwesomeIcon icon={faGoogle} /> &nbsp;Continue with google</button>
+                                    </p>
+                                    <p className='mt-3'>
+                                        <button className="btn btn-primary" onClick={continueWithGoogle}><FontAwesomeIcon icon={faFacebook} /> &nbsp; Continue with facebook</button>
+                                    </p>
+                                    <p className='mt-3'>
+                                        <button className="btn btn-success" onClick={continueWithGoogle}><FontAwesomeIcon icon={faTwitter} /> &nbsp;Continue with twitter</button>
+                                    </p>
                                     <p className='mt-3'>
                                         Already have an account? <Link to='/login'>Sign In</Link>
                                     </p>

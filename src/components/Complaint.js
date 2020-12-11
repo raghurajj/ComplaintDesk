@@ -65,7 +65,6 @@ class Complaint extends Component{
     
 
             const res = await axios.get('/auth/users/me/', config);
-            // console.log(res);
             const author = res.data.id;
             const Category = this.state.topic;
             const description = this.state.description;
@@ -81,6 +80,12 @@ class Complaint extends Component{
                 console.log("compliant post failed");
             }
         } 
+        this.setState({
+            topic:"",
+            description:"",
+            lattitude:"",
+            longitude:""
+        })
 
     }
 
@@ -109,10 +114,10 @@ class Complaint extends Component{
                                 <div className="col-10 col-md-5 mt-3">
                                     <form>
                                         <div className={Styles.C_input}>
-                                            <input onChange={this.onChangeInput}  type="text" name="topic" placeholder="Topic"/><br/> 
+                                            <input onChange={this.onChangeInput}  type="text" name="topic" placeholder="Topic" value={this.state.topic}/><br/> 
                                         </div>  
                                         <div className={Styles.C_input}>
-                                            <textarea onChange={this.onChangeInput} type="text" name="description" placeholder="Description"/><br/> 
+                                            <textarea onChange={this.onChangeInput} type="text" name="description" placeholder="Description" value={this.state.description} /><br/> 
                                         </div> 
                                         <div className={Styles.C_input}>
                                             <input onChange={this.onChangeInput} type="number" name="lattitude" placeholder="Lattitude" value={this.state.lattitude}/><br/> 
