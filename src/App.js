@@ -17,7 +17,8 @@ import ComplaintDetail from './components/ComplaintDetail';
 import { Provider } from 'react-redux';
 import store from './store';
 import Layout from './hocs/Layout';
-
+import Facebook from './components/Facebook';
+import Google from './components/Google';
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
           <Route exact path="/complaintdetail/:pk" component={ComplaintDetail} />
           <Route exact path="/login" component={Login} />
           <Route exact path='/signup' component={Signup} />
+          <Route exact path='/google' component={Google} />
+          <Route exact path='/facebook' component={Facebook} />
           <Route exact path='/reset_password' component={ResetPassword} />
           <Route exact path='/password/reset/confirm/:uid/:token' component={ResetPasswordConfirm} />
           <Route exact path='/activate/:uid/:token' component={Activate} />

@@ -21,10 +21,10 @@ const Signup = ({ signup, isAuthenticated }) => {
 
     const [accountCreated, setAccountCreated] = useState(false);
 
-    const { firstname,lastname, email, password, re_password } = formData;
+    const { firstname,lastname, email, password, re_password, is_employee } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
-
+    const onChangecheckbox = e => setFormData({ ...formData, [e.target.name]: e.target.checked });
     const onSubmit = e => {
         e.preventDefault();
 
@@ -32,12 +32,35 @@ const Signup = ({ signup, isAuthenticated }) => {
             signup({ firstname,lastname, email, password, re_password });
             setAccountCreated(true);
         }
+        else{
+            alert("Both passwords must be same!");
+        }
+        console.log(formData);
     };
+    
     const continueWithGoogle = async()=>{
         try{
-            console.log('yee');
-            const res = await axios.get('/auth/o/google-oauth2/?redirect_uri=http://localhost:8000');
-            console.log(res);
+            const res = await axios.get('/auth/o/google-oauth2/?redirect_uri=http://localhost:8000/google')
+            window.location.replace(res.data.authorization_url);
+        }
+        catch(err){
+            // co
+        }
+    };
+    
+    const continueWithFacebook = async()=>{
+        try{
+            const res = await axios.get('/auth/o/facebook/?redirect_uri=http://localhost:8000/facebook')
+            window.location.replace(res.data.authorization_url);
+        }
+        catch(err){
+            // co
+        }
+    };
+
+    const continueWithTwitter = async()=>{
+        try{
+            const res = await axios.get('/auth/o/twitter/?redirect_uri=http://localhost:8000/twitter')
             window.location.replace(res.data.authorization_url);
         }
         catch(err){
@@ -121,18 +144,39 @@ const Signup = ({ signup, isAuthenticated }) => {
                                                 required
                                             />
                                         </div>
-                                        {/* <div className='form-group'>
-                                            <input
-                                                className='form-control'
-                                                type="checkbox"
-                                                placeholder='Confirm Password*'
-                                                name='re_password'
-                                                value={re_password}
-                                                onChange={e => onChange(e)}
-                                                minLength='6'
-                                                required
-                                            />
-                                        </div> */}
+                                        <div className='form-group'>
+                                            <div className="row">
+                                                <div className="col"><p>Is Employee?</p></div>
+                                                <div className="col">
+                                                    <input
+                                                    className='form-control'
+                                                    type="checkbox"
+                                                    name='is_employee'
+                                                    onChange={e => onChangecheckbox(e)}
+                                                    />
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+
+                                        { is_employee?
+                                            <div className='form-group'>
+                                                <div className="row">
+                                                    <div className="col col-3"><p>ID Card</p></div>
+                                                    <div className="col">
+                                                        <input
+                                                            className='form-control'
+                                                            type='file'
+                                                            placeholder='Upload Image'
+                                                            required
+                                                        />
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>:null
+
+                                        }
+
                                         <button className={`${Styles.btn} ${Styles.fill_button}`}  type='submit'>Register</button>
                                     </form>
                                     <p className='mt-3'>
@@ -142,10 +186,10 @@ const Signup = ({ signup, isAuthenticated }) => {
                                         <button className="btn btn-danger" onClick={continueWithGoogle}><FontAwesomeIcon icon={faGoogle} /> &nbsp;Continue with google</button>
                                     </p>
                                     <p className='mt-3'>
-                                        <button className="btn btn-primary" onClick={continueWithGoogle}><FontAwesomeIcon icon={faFacebook} /> &nbsp; Continue with facebook</button>
+                                        <button className="btn btn-primary" onClick={continueWithFacebook}><FontAwesomeIcon icon={faFacebook} /> &nbsp; Continue with facebook</button>
                                     </p>
                                     <p className='mt-3'>
-                                        <button className="btn btn-success" onClick={continueWithGoogle}><FontAwesomeIcon icon={faTwitter} /> &nbsp;Continue with twitter</button>
+                                        <button className="btn btn-success" onClick={continueWithTwitter}><FontAwesomeIcon icon={faTwitter} /> &nbsp;Continue with twitter</button>
                                     </p>
                                     <p className='mt-3'>
                                         Already have an account? <Link to='/login'>Sign In</Link>

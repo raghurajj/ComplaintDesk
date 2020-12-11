@@ -27,7 +27,27 @@ const Login = ({ login, isAuthenticated }) => {
 
     const continueWithGoogle = async()=>{
         try{
-            const res = await axios.get('/auth/o/google-oauth2/?redirect_uri=http://localhost:8000')
+            const res = await axios.get('/auth/o/google-oauth2/?redirect_uri=http://localhost:8000/google')
+            window.location.replace(res.data.authorization_url);
+        }
+        catch(err){
+            // co
+        }
+    };
+    
+    const continueWithFacebook = async()=>{
+        try{
+            const res = await axios.get('/auth/o/facebook/?redirect_uri=http://localhost:8000/facebook')
+            window.location.replace(res.data.authorization_url);
+        }
+        catch(err){
+            // co
+        }
+    };
+
+    const continueWithTwitter = async()=>{
+        try{
+            const res = await axios.get('/auth/o/twitter/?redirect_uri=http://localhost:8000/twitter')
             window.location.replace(res.data.authorization_url);
         }
         catch(err){
@@ -85,10 +105,10 @@ const Login = ({ login, isAuthenticated }) => {
                                     <button className="btn btn-danger" onClick={continueWithGoogle}><FontAwesomeIcon icon={faGoogle} /> &nbsp;Continue with google</button>
                                 </p>
                                 <p className='mt-3'>
-                                    <button className="btn btn-primary" onClick={continueWithGoogle}><FontAwesomeIcon icon={faFacebook} /> &nbsp; Continue with facebook</button>
+                                    <button className="btn btn-primary" onClick={continueWithFacebook}><FontAwesomeIcon icon={faFacebook} /> &nbsp; Continue with facebook</button>
                                 </p>
                                 <p className='mt-3'>
-                                    <button className="btn btn-success" onClick={continueWithGoogle}><FontAwesomeIcon icon={faTwitter} /> &nbsp;Continue with twitter</button>
+                                    <button className="btn btn-success" onClick={continueWithTwitter}><FontAwesomeIcon icon={faTwitter} /> &nbsp;Continue with twitter</button>
                                 </p>
                                 <p className='mt-3'>
                                 Don't have an account? <Link to='/signup'>Sign Up</Link>

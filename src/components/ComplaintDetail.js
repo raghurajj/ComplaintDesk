@@ -5,6 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import axios from 'axios';
 import { Spring } from 'react-spring/renderprops'; 
 
+
 const Map = ReactMapboxGl({
     accessToken:
     'pk.eyJ1IjoicmFnaHVyYWpqIiwiYSI6ImNrMnJpYzhzZjA2MGIzZXBkb2oxYnV2MWQifQ.1PinwGk6Y3P0q-l7SXkfWg'
