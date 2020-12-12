@@ -19,6 +19,8 @@ import store from './store';
 import Layout from './hocs/Layout';
 import Facebook from './components/Facebook';
 import Google from './components/Google';
+import Testing from './components/Testing';
+
 
 function App() {
   return (
@@ -34,6 +36,7 @@ function App() {
           <Route exact path='/signup' component={Signup} />
           <Route exact path='/google' component={Google} />
           <Route exact path='/facebook' component={Facebook} />
+          <Route exact path='/mockApp' component={Testing} />
           <Route exact path='/reset_password' component={ResetPassword} />
           <Route exact path='/password/reset/confirm/:uid/:token' component={ResetPasswordConfirm} />
           <Route exact path='/activate/:uid/:token' component={Activate} />

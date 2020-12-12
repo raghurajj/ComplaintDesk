@@ -108,7 +108,7 @@ const Login = ({ login, isAuthenticated }) => {
                                     <button className="btn btn-primary" onClick={continueWithFacebook}><FontAwesomeIcon icon={faFacebook} /> &nbsp; Continue with facebook</button>
                                 </p>
                                 <p className='mt-3'>
-                                    <button className="btn btn-success" onClick={continueWithTwitter}><FontAwesomeIcon icon={faTwitter} /> &nbsp;Continue with twitter</button>
+                                <button className="btn btn-success"><a href="https://twitter.com/login?lang=en" className={Styles.navlink} target="_blank"><FontAwesomeIcon icon={faTwitter} /> &nbsp;Continue with twitter</a></button>
                                 </p>
                                 <p className='mt-3'>
                                 Don't have an account? <Link to='/signup'>Sign Up</Link>
