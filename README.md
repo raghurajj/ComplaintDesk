@@ -5,7 +5,7 @@ ComplaintDesk is a platfrom where people can register complaints regarding the p
 
 ---
 
-You can fins the back-end Part of this code [here](https://github.com/raghurajj/ComplaintDesk-Backend)
+You can find the back-end Part of this code [here](https://github.com/raghurajj/ComplaintDesk-Backend)
 
 ---
 
